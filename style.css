@@ -1,120 +1,273 @@
-/* Trecho do Dia - Dark Academy Style */
+/* Trecho do Dia - Dark Academy Premium */
 
 * {
     box-sizing: border-box;
 }
 
-html, body {
+
+html,
+body {
+
     margin: 0;
     padding: 0;
-    background: rgba(0,0,0,0);
+
+    background: transparent;
+
     font-family: "Cormorant Garamond", serif;
+
     overflow: hidden;
+
 }
 
 
 .container {
+
+    position: relative;
+
     width: 100%;
-    min-height: 100px;
+
+    min-height: 220px;
+
     display: flex;
+
     flex-direction: column;
-    justify-content: center;
+
     align-items: center;
+
+    justify-content: center;
+
     text-align: center;
 
-    padding: 25px;
+    padding: 35px 30px;
+
 }
 
 
-/* Trecho principal */
+/* Pequenos detalhes de canto */
 
-#quote {
+.container::before,
+.container::after {
 
-    max-width: 700px;
+    content: "✦";
 
-    margin: 0;
-
-    font-size: clamp(24px, 4vw, 38px);
-
-    font-weight: 500;
-
-    line-height: 1.3;
-
-    letter-spacing: 0.5px;
+    position: absolute;
 
     color: #D4AF37;
 
-    text-shadow:
-        0 0 10px rgba(212,175,55,0.15);
+    opacity: 0.45;
+
+    font-size: 18px;
 
 }
+
+
+.container::before {
+
+    top: 20px;
+
+    left: 30px;
+
+}
+
+
+.container::after {
+
+    bottom: 20px;
+
+    right: 30px;
+
+}
+
+
+
+/* Ornamentos */
+
+.ornament {
+
+    color: #D4AF37;
+
+    opacity: 0.75;
+
+    font-size: 28px;
+
+    line-height: 1;
+
+}
+
+
+.top {
+
+    margin-bottom: 12px;
+
+}
+
+
+.bottom {
+
+    margin-top: 18px;
+
+}
+
+
+
+/* Título */
+
+#title {
+
+    font-size: 14px;
+
+    letter-spacing: 6px;
+
+    font-weight: 600;
+
+    color: #D4AF37;
+
+    opacity: 0.9;
+
+    margin-bottom: 20px;
+
+}
+
+
+
+/* Livro */
+
+#book {
+
+    font-size: 19px;
+
+    font-style: italic;
+
+    color: #C9A646;
+
+    letter-spacing: 1px;
+
+    margin-bottom: 18px;
+
+}
+
+
+
+/* Linha */
+
+.divider {
+
+    width: 120px;
+
+    height: 1px;
+
+    background: #D4AF37;
+
+    opacity: 0.5;
+
+    margin-bottom: 25px;
+
+}
+
+
+
+/* Frase */
+
+#quote {
+
+    max-width: 720px;
+
+    margin: 0;
+
+
+    font-size: clamp(28px, 4vw, 44px);
+
+
+    line-height: 1.35;
+
+
+    font-weight: 500;
+
+
+    color: #D4AF37;
+
+
+    letter-spacing: 0.5px;
+
+
+    text-shadow:
+
+    0 0 14px rgba(212,175,55,0.2);
+
+}
+
 
 
 /* Autor */
 
 #author {
 
-    margin-top: 18px;
+    margin-top: 22px;
 
-    font-size: clamp(16px, 2vw, 22px);
+    font-size: 21px;
 
-    font-weight: 400;
+    color: #C9A646;
 
     letter-spacing: 1px;
 
-    color: #D4AF37;
-
-    opacity: 0.8;
-
 }
 
 
-/* Animação Fade */
+
+/* Animação */
 
 .fade {
 
-    animation: fadeEffect 0.8s ease-in-out;
+    animation: fade 1s ease-in-out;
 
 }
 
 
-@keyframes fadeEffect {
+
+@keyframes fade {
 
     from {
+
         opacity: 0;
-        transform: translateY(8px);
+
+        transform: translateY(10px);
+
     }
 
 
     to {
+
         opacity: 1;
+
         transform: translateY(0);
+
     }
 
 }
 
 
-/* Ajuste para telas pequenas */
 
-@media (max-width: 600px) {
+/* Celular */
+
+@media(max-width:600px){
 
     .container {
 
-        padding: 15px;
+        padding: 25px 15px;
 
     }
 
 
     #quote {
 
-        font-size: 26px;
+        font-size: 29px;
 
     }
 
 
-    #author {
+    #book {
 
-        font-size: 17px;
+        font-size: 16px;
 
     }
 
