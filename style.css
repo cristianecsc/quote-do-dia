@@ -1,80 +1,120 @@
-// Trecho do Dia - Script principal
+/* Trecho do Dia - Dark Academy Style */
 
-const quoteElement = document.getElementById("quote");
-const authorElement = document.getElementById("author");
+* {
+    box-sizing: border-box;
+}
 
-let quotes = [];
-let lastQuoteIndex = -1;
+body {
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    font-family: "Cormorant Garamond", serif;
+}
 
 
-// Carrega as frases do arquivo JSON
-async function loadQuotes() {
-    try {
-        const response = await fetch("quotes.json");
+.container {
+    width: 100%;
+    min-height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 
-        if (!response.ok) {
-            throw new Error("Não foi possível carregar as frases.");
-        }
+    padding: 25px;
+}
 
-        quotes = await response.json();
 
-        showRandomQuote();
+/* Trecho principal */
 
-    } catch (error) {
-        quoteElement.textContent = "Não foi possível carregar o trecho do dia.";
-        authorElement.textContent = "";
+#quote {
 
-        console.error(error);
+    max-width: 700px;
+
+    margin: 0;
+
+    font-size: clamp(24px, 4vw, 38px);
+
+    font-weight: 500;
+
+    line-height: 1.3;
+
+    letter-spacing: 0.5px;
+
+    color: #D4AF37;
+
+    text-shadow:
+        0 0 10px rgba(212,175,55,0.15);
+
+}
+
+
+/* Autor */
+
+#author {
+
+    margin-top: 18px;
+
+    font-size: clamp(16px, 2vw, 22px);
+
+    font-weight: 400;
+
+    letter-spacing: 1px;
+
+    color: #D4AF37;
+
+    opacity: 0.8;
+
+}
+
+
+/* Animação Fade */
+
+.fade {
+
+    animation: fadeEffect 0.8s ease-in-out;
+
+}
+
+
+@keyframes fadeEffect {
+
+    from {
+        opacity: 0;
+        transform: translateY(8px);
     }
-}
 
 
-// Escolhe uma frase aleatória
-function showRandomQuote() {
-
-    if (quotes.length === 0) return;
-
-    let randomIndex;
-
-    do {
-        randomIndex = Math.floor(Math.random() * quotes.length);
-    } while (
-        randomIndex === lastQuoteIndex &&
-        quotes.length > 1
-    );
-
-
-    lastQuoteIndex = randomIndex;
-
-
-    const selectedQuote = quotes[randomIndex];
-
-
-    // Inicia animação de saída
-    quoteElement.classList.remove("fade");
-    authorElement.classList.remove("fade");
-
-
-    setTimeout(() => {
-
-        quoteElement.textContent = `"${selectedQuote.text}"`;
-        authorElement.textContent = selectedQuote.author 
-            ? `— ${selectedQuote.author}` 
-            : "";
-
-
-        // Animação de entrada
-        quoteElement.classList.add("fade");
-        authorElement.classList.add("fade");
-
-    }, 200);
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 
 }
 
 
-// Atualiza automaticamente a cada 60 segundos
-setInterval(showRandomQuote, 60000);
+/* Ajuste para telas pequenas */
+
+@media (max-width: 600px) {
+
+    .container {
+
+        padding: 15px;
+
+    }
 
 
-// Inicializa o widget
-loadQuotes();
+    #quote {
+
+        font-size: 26px;
+
+    }
+
+
+    #author {
+
+        font-size: 17px;
+
+    }
+
+}
