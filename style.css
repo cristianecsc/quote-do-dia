@@ -26,6 +26,8 @@ body {
 
     width: 100%;
 
+    height: auto;
+
     min-height: 220px;
 
     display: flex;
@@ -170,12 +172,14 @@ body {
 
 #quote {
 
+    width: 90%;
+    
     max-width: 720px;
 
     margin: 0;
 
 
-    font-size: clamp(28px, 4vw, 44px);
+    font-size: clamp(20px, 3vw, 44px);
 
 
     line-height: 1.35;
