@@ -2,42 +2,61 @@
 
 const quoteElement = document.getElementById("quote");
 const authorElement = document.getElementById("author");
+const bookElement = document.getElementById("book");
 
 let quotes = [];
 let lastQuoteIndex = -1;
 
 
-// Carrega as frases do arquivo JSON
+// Carrega as frases
+
 async function loadQuotes() {
+
     try {
+
         const response = await fetch("quotes.json");
 
+
         if (!response.ok) {
-            throw new Error("Não foi possível carregar as frases.");
+            throw new Error("Erro ao carregar quotes.json");
         }
+
 
         quotes = await response.json();
 
         showRandomQuote();
 
+
     } catch (error) {
-        quoteElement.textContent = "Não foi possível carregar o trecho do dia.";
-        authorElement.textContent = "";
+
+        quoteElement.textContent =
+            "Não foi possível carregar o trecho.";
 
         console.error(error);
+
     }
+
 }
 
 
-// Escolhe uma frase aleatória
+// Mostra uma frase aleatória
+
 function showRandomQuote() {
+
 
     if (quotes.length === 0) return;
 
+
     let randomIndex;
 
+
     do {
-        randomIndex = Math.floor(Math.random() * quotes.length);
+
+        randomIndex = Math.floor(
+            Math.random() * quotes.length
+        );
+
+
     } while (
         randomIndex === lastQuoteIndex &&
         quotes.length > 1
@@ -50,31 +69,52 @@ function showRandomQuote() {
     const selectedQuote = quotes[randomIndex];
 
 
-    // Inicia animação de saída
+    // Remove animação antiga
+
     quoteElement.classList.remove("fade");
     authorElement.classList.remove("fade");
+    bookElement.classList.remove("fade");
 
 
     setTimeout(() => {
 
-        quoteElement.textContent = `"${selectedQuote.text}"`;
-        authorElement.textContent = selectedQuote.author 
-            ? `— ${selectedQuote.author}` 
+
+        quoteElement.textContent =
+            `"${selectedQuote.text}"`;
+
+
+        authorElement.textContent =
+            selectedQuote.author
+            ? `— ${selectedQuote.author}`
             : "";
 
 
-        // Animação de entrada
+        bookElement.textContent =
+            selectedQuote.book
+            ? selectedQuote.book
+            : "";
+
+
+        // Aplica animação
+
         quoteElement.classList.add("fade");
         authorElement.classList.add("fade");
+        bookElement.classList.add("fade");
+
 
     }, 200);
 
 }
 
 
-// Atualiza automaticamente a cada 60 segundos
-setInterval(showRandomQuote, 60000);
+// Troca automaticamente a cada 60 segundos
+
+setInterval(
+    showRandomQuote,
+    60000
+);
 
 
-// Inicializa o widget
+// Inicialização
+
 loadQuotes();
