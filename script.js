@@ -1,42 +1,80 @@
-[
-  {
-    "text": "A mente que se abre a uma nova ideia jamais volta ao seu tamanho original.",
-    "author": "Albert Einstein"
-  },
-  {
-    "text": "Não é na tranquilidade que o caráter é formado, mas nos desafios que escolhemos enfrentar.",
-    "author": ""
-  },
-  {
-    "text": "Um livro é um sonho que você segura nas mãos.",
-    "author": "Neil Gaiman"
-  },
-  {
-    "text": "A disciplina é a ponte entre objetivos e realizações.",
-    "author": "Jim Rohn"
-  },
-  {
-    "text": "O conhecimento é a única riqueza que aumenta quando é compartilhada.",
-    "author": ""
-  },
-  {
-    "text": "A excelência não é um ato, mas um hábito.",
-    "author": "Aristóteles"
-  },
-  {
-    "text": "Grandes coisas nunca são feitas por uma única pessoa; elas são feitas por uma equipe.",
-    "author": "Steve Jobs"
-  },
-  {
-    "text": "A jornada de mil quilômetros começa com um único passo.",
-    "author": "Lao Tsé"
-  },
-  {
-    "text": "O segredo do progresso é começar.",
-    "author": "Mark Twain"
-  },
-  {
-    "text": "Aprender é a única coisa que a mente nunca se cansa, nunca teme e nunca se arrepende.",
-    "author": "Leonardo da Vinci"
-  }
-]
+// Trecho do Dia - Script principal
+
+const quoteElement = document.getElementById("quote");
+const authorElement = document.getElementById("author");
+
+let quotes = [];
+let lastQuoteIndex = -1;
+
+
+// Carrega as frases do arquivo JSON
+async function loadQuotes() {
+    try {
+        const response = await fetch("quotes.json");
+
+        if (!response.ok) {
+            throw new Error("Não foi possível carregar as frases.");
+        }
+
+        quotes = await response.json();
+
+        showRandomQuote();
+
+    } catch (error) {
+        quoteElement.textContent = "Não foi possível carregar o trecho do dia.";
+        authorElement.textContent = "";
+
+        console.error(error);
+    }
+}
+
+
+// Escolhe uma frase aleatória
+function showRandomQuote() {
+
+    if (quotes.length === 0) return;
+
+    let randomIndex;
+
+    do {
+        randomIndex = Math.floor(Math.random() * quotes.length);
+    } while (
+        randomIndex === lastQuoteIndex &&
+        quotes.length > 1
+    );
+
+
+    lastQuoteIndex = randomIndex;
+
+
+    const selectedQuote = quotes[randomIndex];
+
+
+    // Inicia animação de saída
+    quoteElement.classList.remove("fade");
+    authorElement.classList.remove("fade");
+
+
+    setTimeout(() => {
+
+        quoteElement.textContent = `"${selectedQuote.text}"`;
+        authorElement.textContent = selectedQuote.author 
+            ? `— ${selectedQuote.author}` 
+            : "";
+
+
+        // Animação de entrada
+        quoteElement.classList.add("fade");
+        authorElement.classList.add("fade");
+
+    }, 200);
+
+}
+
+
+// Atualiza automaticamente a cada 60 segundos
+setInterval(showRandomQuote, 60000);
+
+
+// Inicializa o widget
+loadQuotes();
