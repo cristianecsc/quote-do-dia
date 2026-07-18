@@ -28,7 +28,7 @@ body {
 
     height: auto;
 
-    min-height: 220px;
+    min-height: 180px;
 
     display: flex;
 
@@ -40,7 +40,7 @@ body {
 
     text-align: center;
 
-    padding: 35px 30px;
+    padding: 25px 15px;
 
 }
 
@@ -172,14 +172,14 @@ body {
 
 #quote {
 
-    width: 90%;
+    width: 100%;
     
     max-width: 720px;
 
     margin: 0;
 
 
-    font-size: clamp(20px, 3vw, 44px);
+    font-size: clamp(16px, 3vw, 44px);
 
 
     line-height: 1.35;
@@ -192,6 +192,12 @@ body {
 
 
     letter-spacing: 0.5px;
+
+    
+    overflow-wrap: break-word;
+
+
+    word-wrap: break-word;
 
 
     text-shadow:
@@ -208,7 +214,7 @@ body {
 
     margin-top: 22px;
 
-    font-size: 21px;
+    font-size: clamp(12px, 1.5vw, 21px);
 
     color: #C9A646;
 
